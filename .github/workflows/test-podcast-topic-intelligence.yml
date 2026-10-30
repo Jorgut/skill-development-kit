@@ -1,0 +1,22 @@
+name: Podcast Topic Intelligence tests
+
+on:
+  pull_request:
+    paths:
+      - 'skills/podcast-topic-intelligence/**'
+      - '.github/workflows/test-podcast-topic-intelligence.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'skills/podcast-topic-intelligence/**'
+
+jobs:
+  skill-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate skill and run tests
+        run: python3 -m unittest discover -s skills/podcast-topic-intelligence/tests -p 'test_*.py' -v
